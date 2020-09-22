@@ -2,11 +2,14 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:mvc="http://www.springframework.org/schema/mvc"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
     xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- 配置HandlerMapping处理器映射器 -->
 	<!-- BeanNameHandlerMapping(默认使用)(不推荐使用)
@@ -48,7 +51,7 @@
     
     <!-- MultiActionController配置 -->
     <bean id="multiActionController" class="com.org.multiactioncontroller.MultiActionControllerTest">
-      <!-- 引入配置的自定义路径 -->
+      <!-- PropertiesMethodNameResolver配置需要引入配置的自定义路径 -->
       <!-- <property name="methodNameResolver" ref="propertiesMethodNameResolver" /> -->
     </bean>
     
@@ -73,4 +76,10 @@
        配置后缀
       <property name="suffix" value=".jsp"></property>
     </bean> -->
+    
+    <!-- 注解配置,配置自动扫包组件即可
+         特别简单，配置文件中只需要写一个自动扫包就可以了
+         然后在先在类上打@Controller注解，然后在每个要处理的方法上打上注解@RequestMapping即可
+     -->
+    <!-- <context:component-scan base-package="com.org.annotation" /> -->
 </beans>
