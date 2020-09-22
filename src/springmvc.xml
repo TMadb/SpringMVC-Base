@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- 配置HandlerMapping处理器映射(不推荐使用) -->
+	<!-- BeanNameHandlerMapping
+	     每次配置一个Controller都需要重新配置一个Bean，容器会重复创建Bean
+	 -->
+	<!-- <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" /> -->
+	
+	<!-- 通常使用SimpleUrlHanderMapping
+	     可以使多个请求对应一个Controller
+	 -->
+	 <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	    <!-- 配置请求 -->
+	    <property name="urlMap">
+	      <map>
+	        <!-- 使用my.do访问 -->
+	        <entry key="/my.do" value-ref="myOneController" />
+	      </map>
+	    </property>
+	 </bean>
+    <!-- 配置Controller -->
+    <bean id="myOneController" class="com.org.controller.MyOneController" />
+</beans>
